@@ -1,0 +1,62 @@
+# Balmari Website - Git Ignore File
+
+# Database backups
+*.sql
+*.bak
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+.env.local
+.env.*.local
+
+# Uploaded files
+assets/images/uploads/
+assets/uploads/
+
+# Logs
+logs/
+*.log
+
+# PHP temporary files
+tmp/
+temp/
+cache/
+
+# Composer
+vendor/
+composer.lock
+
+# Environment files (for production)
+.env
+.env.local
+.env.production
+
+# Private files
+private/
+secrets/
+
+# Backup files
+*.bk
+backup/
+
+# Node modules (if using npm in future)
+node_modules/
+package-lock.json
+
+# Build files
+dist/
+build/
+
+# Session files
+sessions/
+*.sess

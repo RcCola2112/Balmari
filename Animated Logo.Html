@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Glowing Balmari Text</title>
+<style>
+  body {
+    margin: 0;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Ballmer", "Times New Roman", serif;
+  }
+
+  .container {
+    text-align: center;
+  }
+
+  /* MAIN TITLE */
+  .title span {
+    font-size: 7vw;
+    letter-spacing: 1vw;
+    color: #2b2b2b;
+    opacity: 0;
+    display: inline-block;
+    text-shadow: 0 0 0px #fff;
+    animation: glowIn 0.7s forwards;
+  }
+
+  /* LEFT TO RIGHT DELAY */
+  .title span:nth-child(1){ animation-delay: .2s; }
+  .title span:nth-child(2){ animation-delay: .4s; }
+  .title span:nth-child(3){ animation-delay: .6s; }
+  .title span:nth-child(4){ animation-delay: .8s; }
+  .title span:nth-child(5){ animation-delay: 1s; }
+  .title span:nth-child(6){ animation-delay: 1.2s; }
+  .title span:nth-child(7){ animation-delay: 1.4s; }
+
+  @keyframes glowIn {
+    0% {
+      opacity: 0;
+      color: #111;
+      text-shadow: 0 0 0px #fff;
+      transform: translateY(40px);
+    }
+    50% {
+      opacity: 1;
+      color: #fff;
+      text-shadow:
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 40px #ff3b3b,
+        0 0 80px #ff3b3b;
+    }
+    100% {
+      opacity: 1;
+      color: #e5e5e5;
+      text-shadow:
+        0 0 5px #fff,
+        0 0 10px #ff3b3b;
+      transform: translateY(0);
+    }
+  }
+
+  /* SUBTITLE */
+  .subtitle span {
+    font-size: 2vw;
+    letter-spacing: .4vw;
+    color: #777;
+    opacity: 0;
+    display: inline-block;
+    animation: glowSub .6s forwards;
+  }
+
+  .subtitle span:nth-child(1){ animation-delay: 2s; }
+  .subtitle span:nth-child(2){ animation-delay: 2.1s; }
+  .subtitle span:nth-child(3){ animation-delay: 2.2s; }
+  .subtitle span:nth-child(4){ animation-delay: 2.3s; }
+  .subtitle span:nth-child(5){ animation-delay: 2.4s; }
+  .subtitle span:nth-child(6){ animation-delay: 2.5s; }
+  .subtitle span:nth-child(7){ animation-delay: 2.6s; }
+  .subtitle span:nth-child(8){ animation-delay: 2.7s; }
+  .subtitle span:nth-child(9){ animation-delay: 2.8s; }
+  .subtitle span:nth-child(10){ animation-delay: 2.9s; }
+  .subtitle span:nth-child(11){ animation-delay: 3.0s; }
+  .subtitle span:nth-child(12){ animation-delay: 3.1s; }
+  .subtitle span:nth-child(13){ animation-delay: 3.2s; }
+  .subtitle span:nth-child(14){ animation-delay: 3.3s; }
+  .subtitle span:nth-child(15){ animation-delay: 3.4s; }
+  .subtitle span:nth-child(16){ animation-delay: 3.5s; }
+  .subtitle span:nth-child(17){ animation-delay: 3.6s; }
+  .subtitle span:nth-child(18){ animation-delay: 3.7s; }
+  .subtitle span:nth-child(19){ animation-delay: 3.8s; }
+  .subtitle span:nth-child(20){ animation-delay: 3.9s; }
+
+  @keyframes glowSub {
+    0% { opacity: 0; color: #111; }
+    50% {
+      opacity: 1;
+      color: #fff;
+      text-shadow: 0 0 10px #fff, 0 0 20px #ff3b3b;
+    }
+    100% {
+      opacity: 1;
+      color: #aaa;
+      text-shadow: 0 0 5px #fff;
+    }
+  }
+
+  .amp { color: #ff3b3b !important; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="title">
+    <span>B</span><span>A</span><span>L</span><span>M</span><span>A</span><span>R</span><span>I</span>
+  </div>
+
+  <div class="subtitle">
+    <span>D</span><span>e</span><span>s</span><span>i</span><span>g</span><span>n</span>
+    <span class="amp">&</span>
+    <span>C</span><span>o</span><span>n</span><span>s</span><span>t</span><span>r</span><span>u</span><span>c</span><span>t</span><span>i</span><span>o</span><span>n</span>
+  </div>
+</div>
+
+</body>
+</html>
