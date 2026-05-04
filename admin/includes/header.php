@@ -143,7 +143,14 @@ $page_title = $page_title ?? 'Admin Panel';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php
+        $favicon_path = '../assets/images/Balmari_Icon.png';
+        $favicon_version = file_exists(dirname(__FILE__) . '/../../assets/images/Balmari_Icon.png') ? filemtime(dirname(__FILE__) . '/../../assets/images/Balmari_Icon.png') : time();
+    ?>
     <title><?php echo htmlspecialchars($page_title); ?> - Balmari Admin</title>
+    <link rel="icon" href="<?php echo $favicon_path . '?v=' . $favicon_version; ?>" type="image/png">
+    <link rel="shortcut icon" href="<?php echo $favicon_path . '?v=' . $favicon_version; ?>" type="image/png">
+    <link rel="apple-touch-icon" href="<?php echo $favicon_path . '?v=' . $favicon_version; ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">

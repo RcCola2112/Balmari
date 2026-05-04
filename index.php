@@ -126,12 +126,16 @@
                     style="background-image: linear-gradient(rgba(24, 61, 61, 0.45), rgba(24, 61, 61, 0.45)), url('<?php echo htmlspecialchars($completed_cover_images[0], ENT_QUOTES, 'UTF-8'); ?>');"
                 ></div>
             </div>
-            <div class="bg-[#040D12] flex items-center justify-center w-full h-full h-full">
-                    <a href="completed.php" class="font-['Playfair_Display'] text-3xl md:text-4xl font-semibold text-white drop-shadow-lg hover:text-white hover:underline transition">Completed Work</a>
-            </div>
-            <div class="bg-[#040D12] flex items-center justify-center w-full h-full h-full">
-                    <a href="progress.php" class="font-['Playfair_Display'] text-3xl md:text-4xl font-semibold text-white drop-shadow-lg hover:text-white hover:underline transition">In Progress</a>
-            </div>
+                <div class="bg-[#040D12] flex items-center justify-center w-full h-full h-full px-6">
+                    <a href="completed.php" class="inline-flex items-center justify-center min-w-[220px] px-8 py-4 rounded-full border-2 border-[#5C8374] bg-[#183D3D] text-white font-['Playfair_Display'] text-2xl md:text-3xl font-semibold shadow-xl shadow-[#040D12]/40 hover:bg-[#5C8374] hover:text-[#040D12] hover:scale-105 transition duration-300 text-center">
+                    Completed Work
+                    </a>
+                </div>
+                <div class="bg-[#040D12] flex items-center justify-center w-full h-full h-full px-6">
+                    <a href="progress.php" class="inline-flex items-center justify-center min-w-[220px] px-8 py-4 rounded-full border-2 border-[#5C8374] bg-[#183D3D] text-white font-['Playfair_Display'] text-2xl md:text-3xl font-semibold shadow-xl shadow-[#040D12]/40 hover:bg-[#5C8374] hover:text-[#040D12] hover:scale-105 transition duration-300 text-center">
+                    In Progress
+                    </a>
+                </div>
             <div class="relative w-full h-full overflow-hidden">
                 <div
                     id="progressCarousel"

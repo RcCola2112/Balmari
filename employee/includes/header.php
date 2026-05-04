@@ -18,7 +18,14 @@ if (!isset($_SESSION['employee_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php
+        $favicon_path = '../assets/images/Balmari_Icon.png';
+        $favicon_version = file_exists(dirname(__FILE__) . '/../../assets/images/Balmari_Icon.png') ? filemtime(dirname(__FILE__) . '/../../assets/images/Balmari_Icon.png') : time();
+    ?>
     <title><?php echo isset($page_title) ? htmlspecialchars($page_title) . ' - Balmari' : 'Balmari Employee'; ?></title>
+    <link rel="icon" href="<?php echo $favicon_path . '?v=' . $favicon_version; ?>" type="image/png">
+    <link rel="shortcut icon" href="<?php echo $favicon_path . '?v=' . $favicon_version; ?>" type="image/png">
+    <link rel="apple-touch-icon" href="<?php echo $favicon_path . '?v=' . $favicon_version; ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -51,6 +58,9 @@ if (!isset($_SESSION['employee_id'])) {
                 <a href="manage_carousel.php" class="nav-link block px-4 py-2 rounded-lg text-[#D3DAD9]"> <i class="fas fa-images mr-2"></i>Carousel</a>
                 <a href="manage_completed.php" class="nav-link block px-4 py-2 rounded-lg text-[#D3DAD9]"> <i class="fas fa-check-circle mr-2"></i>Completed Work</a>
                 <a href="manage_progress.php" class="nav-link block px-4 py-2 rounded-lg text-[#D3DAD9]"> <i class="fas fa-project-diagram mr-2"></i>Project in Progress</a>
+                <a href="contact_information.php" class="nav-link block px-4 py-2 rounded-lg text-[#D3DAD9]"> <i class="fas fa-briefcase mr-2"></i>Contact Info</a>
+                <a href="about_us.php" class="nav-link block px-4 py-2 rounded-lg text-[#D3DAD9]"> <i class="fas fa-info-circle mr-2"></i>About Page</a>
+                <a href="inquiries.php" class="nav-link block px-4 py-2 rounded-lg text-[#D3DAD9]"> <i class="fas fa-envelope mr-2"></i>Inquiries</a>
                 <a href="settings.php" class="nav-link block px-4 py-2 rounded-lg text-[#D3DAD9]"> <i class="fas fa-cog mr-2"></i>Settings</a>
             </nav>
 

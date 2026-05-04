@@ -14,18 +14,25 @@ $carousel_count = 0;
 $db_error = false;
 
 try {
-    if (isset($conn) && $conn) {
+    $carousel_dir = realpath(__DIR__ . '/../assets/images/carousel');
+    if ($carousel_dir && is_dir($carousel_dir)) {
+        $carousel_files = glob($carousel_dir . '/*.{jpg,jpeg,png,webp,gif}', GLOB_BRACE);
+        $carousel_count = is_array($carousel_files) ? count($carousel_files) : 0;
+    }
+
+    if ($carousel_count === 0 && isset($conn) && $conn) {
         $stmt = $conn->prepare("SELECT COUNT(*) as count FROM carousel");
         if ($stmt) {
             $stmt->execute();
             $result = $stmt->get_result();
             $row = $result->fetch_assoc();
-            $carousel_count = $row['count'];
+            $carousel_count = (int)($row['count'] ?? 0);
             $stmt->close();
-        } else {
-            $db_error = true;
         }
-    } else {
+    }
+
+    // Only treat it as a warning if we still could not obtain a count.
+    if ($carousel_count === 0) {
         $db_error = true;
     }
 } catch (Exception $e) {

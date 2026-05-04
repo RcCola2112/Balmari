@@ -143,12 +143,12 @@ try {
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
                         <thead>
-                            <tr class="bg-[#715A5A]">
-                                <th class="px-6 py-3 text-left text-[#D3DAD9]">User</th>
-                                <th class="px-6 py-3 text-left text-[#D3DAD9]">Action</th>
-                                <th class="px-6 py-3 text-left text-[#D3DAD9]">Type</th>
-                                <th class="px-6 py-3 text-left text-[#D3DAD9]">Description</th>
-                                <th class="px-6 py-3 text-left text-[#D3DAD9]">Timestamp</th>
+                            <tr class="bg-[#5C8374]/20 border-b border-[#5C8374]/40 shadow-sm">
+                                <th class="px-6 py-3 text-left text-[#D3DAD9] uppercase tracking-wide text-xs font-semibold">User</th>
+                                <th class="px-6 py-3 text-left text-[#D3DAD9] uppercase tracking-wide text-xs font-semibold">Action</th>
+                                <th class="px-6 py-3 text-left text-[#D3DAD9] uppercase tracking-wide text-xs font-semibold">Type</th>
+                                <th class="px-6 py-3 text-left text-[#D3DAD9] uppercase tracking-wide text-xs font-semibold">Description</th>
+                                <th class="px-6 py-3 text-left text-[#D3DAD9] uppercase tracking-wide text-xs font-semibold">Timestamp</th>
                             </tr>
                         </thead>
                         <tbody>
