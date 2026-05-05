@@ -8,9 +8,24 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Include login throttle helper
+$throttle_path = __DIR__ . '/login_throttle.php';
+if (file_exists($throttle_path)) {
+    require_once $throttle_path;
+}
+
 // expects $conn (mysqli) from includes/db.php
 function loginShared($email, $password) {
     global $conn;
+    // Throttle key combines normalized email and client IP to reduce brute-force risk
+    $client_ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $throttle_key = 'e:' . md5(strtolower(trim($email))) . '|ip:' . $client_ip;
+    if (function_exists('is_locked_out')) {
+        $locked = is_locked_out($throttle_key);
+        if ($locked !== false) {
+            return ['success' => false, 'message' => 'Too many failed attempts. Try again in ' . ceil($locked/60) . ' minute(s).'];
+        }
+    }
     if (!isset($conn) || !$conn) {
         error_log('Database connection missing in loginShared');
         return ['success' => false, 'message' => 'Database connection error'];
@@ -32,6 +47,9 @@ function loginShared($email, $password) {
         $stmt->close();
 
         if (!password_verify($password, $user['password'])) {
+            if (function_exists('record_failed_login')) {
+                record_failed_login($throttle_key);
+            }
             return ['success' => false, 'message' => 'Incorrect password'];
         }
 
@@ -63,6 +81,10 @@ function loginShared($email, $password) {
         // Note: `user` table in DB does not have last_login/status by default;
         // skip updating last_login to avoid errors.
 
+        // Successful login: clear throttle state for this key
+        if (function_exists('reset_login_attempts')) {
+            reset_login_attempts($throttle_key);
+        }
         return ['success' => true, 'message' => 'Login successful', 'role' => $user['role']];
     } catch (Exception $e) {
         error_log('loginShared error: ' . $e->getMessage());

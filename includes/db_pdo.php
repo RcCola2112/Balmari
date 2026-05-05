@@ -1,16 +1,9 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// Hostinger Production Database Configuration (PDO Version - Optional)
-// This is a more modern and secure alternative to MySQLi
-
-// Use same credentials as includes/db.php / admin config
-$host = "localhost";
-$db   = "u549992181_Balmari_DB";
-$user = "u549992181_Admin_Balmari";
-$pass = "Admin_01_Balmari";
+// Database connection (PDO): prefer environment variables
+$host = getenv('DB_HOST') ?: 'localhost';
+$db   = getenv('DB_NAME') ?: 'u549992181_Balmari_DB';
+$user = getenv('DB_USER') ?: 'u549992181_Admin_Balmari';
+$pass = getenv('DB_PASS') ?: 'Admin_01_Balmari';
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass);
@@ -18,6 +11,7 @@ try {
     // Also provide $pdo alias for modules expecting that variable
     $pdo = $conn;
 } catch(PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+    error_log('PDO DB connection failed: ' . $e->getMessage());
+    die('Database connection failed');
 }
 ?>

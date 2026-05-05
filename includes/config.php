@@ -1,7 +1,16 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// Debug and environment configuration
+// Use environment variables to control behavior in production
+$app_env = getenv('APP_ENV') ?: 'development';
+$app_debug = getenv('APP_DEBUG'); // if set, use it ("1" or "0")
+if ($app_debug !== false) {
+	$debug = filter_var($app_debug, FILTER_VALIDATE_BOOLEAN);
+} else {
+	$debug = ($app_env !== 'production');
+}
+ini_set('display_errors', $debug ? 1 : 0);
+ini_set('display_startup_errors', $debug ? 1 : 0);
+error_reporting($debug ? E_ALL : 0);
 
 /**
  * Balmari Configuration File

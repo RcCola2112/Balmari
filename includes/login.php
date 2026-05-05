@@ -10,6 +10,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/auth.php';
+// CSRF protection for login form
+$csrf_path = __DIR__ . '/csrf.php';
+if (file_exists($csrf_path)) {
+    require_once $csrf_path;
+}
 
 $error_message = '';
 $success_message = '';
@@ -37,6 +42,13 @@ if (isset($_SESSION['admin_user_id'])) {
 
 // Handle login form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verify CSRF token if present
+    if (function_exists('csrf_verify')) {
+        $token = $_POST['_csrf'] ?? null;
+        if (!csrf_verify($token)) {
+            $error_message = 'Invalid form submission (CSRF).';
+        }
+    }
     // Forgot password handler
     if (isset($_POST['forgot_password'])) {
         $forgot_email = isset($_POST['forgot_email']) ? trim($_POST['forgot_email']) : '';
@@ -163,6 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
             <!-- Login Form -->
             <form method="POST" class="space-y-4">
+                            <?php if (function_exists('csrf_input')) echo csrf_input(); ?>
                 <!-- Email -->
                 <div>
                     <label for="email" class="block text-sm font-medium text-[#FFFFFF] mb-2">

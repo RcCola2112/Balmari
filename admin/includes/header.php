@@ -137,6 +137,29 @@ if (!function_exists('get_dashboard_stats')) {
     }
 }
 $page_title = $page_title ?? 'Admin Panel';
+// Include CSRF helper for admin POST protection
+$csrf_path = dirname(__FILE__) . '/../../includes/csrf.php';
+if (file_exists($csrf_path)) {
+    require_once $csrf_path;
+}
+
+// Verify CSRF for all incoming admin POST requests (simple central check)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $token = null;
+    // Prefer token from header for AJAX
+    if (!empty($_SERVER['HTTP_X_CSRF_TOKEN'])) {
+        $token = $_SERVER['HTTP_X_CSRF_TOKEN'];
+    } elseif (!empty($_POST['_csrf'])) {
+        $token = $_POST['_csrf'];
+    }
+    if (function_exists('csrf_verify')) {
+        if (!csrf_verify($token)) {
+            http_response_code(403);
+            echo 'CSRF verification failed.';
+            exit;
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -184,6 +207,25 @@ $page_title = $page_title ?? 'Admin Panel';
         .logout-btn { display:block; width:100%; padding: .5rem 1rem; border-radius: .5rem; text-align:center; background-color: var(--accent-color); color: var(--text-light); transition: background-color .15s ease; }
         .logout-btn:hover { background-color: var(--accent-hover); }
     </style>
+    <?php if (function_exists('csrf_get_token')): ?>
+    <script>
+        // Inject CSRF token into POST forms automatically
+        (function(){
+            var token = '<?php echo htmlspecialchars(csrf_get_token(), ENT_QUOTES, "UTF-8"); ?>';
+            if (!token) return;
+            document.addEventListener('DOMContentLoaded', function(){
+                var forms = document.querySelectorAll('form[method="POST"]');
+                forms.forEach(function(f){
+                    if (!f.querySelector('input[name="_csrf"]')) {
+                        var i = document.createElement('input');
+                        i.type = 'hidden'; i.name = '_csrf'; i.value = token;
+                        f.appendChild(i);
+                    }
+                });
+            });
+        })();
+    </script>
+    <?php endif; ?>
     </head>
     <body class="bg-[#040D12] font-['Inter'] text-[#D3DAD9]">
     <div class="flex min-h-screen">
